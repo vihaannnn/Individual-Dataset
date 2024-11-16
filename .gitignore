@@ -1,2 +1,6 @@
 venv/
 .env
+data/
+output/
+output_normal/
+RawFiles/

@@ -28,15 +28,17 @@ def write_array_to_file(array, filename, lines_between):
 def remove_newlines(string_array):
     return [s.strip() for s in string_array]
 
+
+
 import os
 
 directory = './data'
-
+c = 1
 for filename in os.listdir(directory):
     if os.path.isfile(os.path.join(directory, filename)):
-        print(filename)    
+        print(filename)
     # Open the PDF file
-    with pdfplumber.open("data/1.pdf") as pdf:
+    with pdfplumber.open("./data/" + filename) as pdf:
 
         # Iterate through all pages
         
@@ -71,14 +73,15 @@ for filename in os.listdir(directory):
             text_total += text 
             total_text_normal += text_normal
         
-        with open('output1.txt', 'w') as file:      
+        with open('./output/output' + str(c) + '.txt', 'w') as file:      
             file.write(text_total)
         
-        with open('output_normal1.txt', 'w') as file:      
+        with open('./output_normal/output_normal' + str(c) + '.txt', 'w') as file:      
             file.write(total_text_normal)
 
-        print(type(text_total))
-        chunks = paragraph_chunking(text_total, 2)
-        chunks = remove_newlines(chunks)
-        write_array_to_file(chunks, '1.txt', lines_between=4)
+        # print(type(text_total))
+        # chunks = paragraph_chunking(text_total, 2)
+        # chunks = remove_newlines(chunks)
+        # write_array_to_file(chunks, str(c) +'.txt', lines_between=4)
         # print(chunks)
+        c += 1
