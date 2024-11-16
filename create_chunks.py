@@ -28,50 +28,57 @@ def write_array_to_file(array, filename, lines_between):
 def remove_newlines(string_array):
     return [s.strip() for s in string_array]
 
-# Open the PDF file
-with pdfplumber.open("data/1.pdf") as pdf:
+import os
 
-    # Iterate through all pages
-    
+directory = './data'
 
-    text = ''
-    pages = pdf.pages
-    text_total = ''
-    total_text_normal = ''
-    for page in pages:
-        # print(type(pdf.pages))
-        # Extract text from the page
-        text = page.extract_text()
+for filename in os.listdir(directory):
+    if os.path.isfile(os.path.join(directory, filename)):
+        print(filename)    
+    # Open the PDF file
+    with pdfplumber.open("data/1.pdf") as pdf:
+
+        # Iterate through all pages
         
-        text_normal = text
-        # print(text)
-        # Remove common hidden characters, but keep newlines
-        text = re.sub(r'[\x00-\x09\x0B-\x1F\x7F-\x9F]', '', text)
-    
-        # Remove zero-width characters
-        text = re.sub(r'[\u200B-\u200D\uFEFF]', '', text)
-    
-        # Remove other invisible separator characters, but keep newlines
-        text = re.sub(r'[\u2000-\u200F\u2028-\u202E\u205F-\u206F]', '', text)
-    
-        # Remove control characters, but keep newlines
-        text = ''.join(char for char in text if ord(char) >= 32 or char == '\n')
 
-        text = re.sub(r'\n', ' ', text)
-    
-         # Normalize whitespace (optional)
-        # text = ' '.join(text.split())
-        text_total += text 
-        total_text_normal += text_normal
-    
-    with open('output1.txt', 'w') as file:      
-        file.write(text_total)
-    
-    with open('output_normal1.txt', 'w') as file:      
-        file.write(total_text_normal)
+        text = ''
+        pages = pdf.pages
+        text_total = ''
+        total_text_normal = ''
+        for page in pages:
+            # print(type(pdf.pages))
+            # Extract text from the page
+            text = page.extract_text()
+            
+            text_normal = text
+            # print(text)
+            # Remove common hidden characters, but keep newlines
+            text = re.sub(r'[\x00-\x09\x0B-\x1F\x7F-\x9F]', '', text)
+        
+            # Remove zero-width characters
+            text = re.sub(r'[\u200B-\u200D\uFEFF]', '', text)
+        
+            # Remove other invisible separator characters, but keep newlines
+            text = re.sub(r'[\u2000-\u200F\u2028-\u202E\u205F-\u206F]', '', text)
+        
+            # Remove control characters, but keep newlines
+            text = ''.join(char for char in text if ord(char) >= 32 or char == '\n')
 
-    print(type(text_total))
-    chunks = paragraph_chunking(text_total, 2)
-    chunks = remove_newlines(chunks)
-    write_array_to_file(chunks, '1.txt', lines_between=4)
-    # print(chunks)
+            text = re.sub(r'\n', ' ', text)
+        
+            # Normalize whitespace (optional)
+            # text = ' '.join(text.split())
+            text_total += text 
+            total_text_normal += text_normal
+        
+        with open('output1.txt', 'w') as file:      
+            file.write(text_total)
+        
+        with open('output_normal1.txt', 'w') as file:      
+            file.write(total_text_normal)
+
+        print(type(text_total))
+        chunks = paragraph_chunking(text_total, 2)
+        chunks = remove_newlines(chunks)
+        write_array_to_file(chunks, '1.txt', lines_between=4)
+        # print(chunks)
