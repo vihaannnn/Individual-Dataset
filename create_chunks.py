@@ -33,10 +33,11 @@ def remove_newlines(string_array):
 import os
 
 directory = './data'
-c = 1
+c = ''
 for filename in os.listdir(directory):
     if os.path.isfile(os.path.join(directory, filename)):
         print(filename)
+        c = filename[:-4]
     # Open the PDF file
     with pdfplumber.open("./data/" + filename) as pdf:
 
@@ -84,4 +85,4 @@ for filename in os.listdir(directory):
         # chunks = remove_newlines(chunks)
         # write_array_to_file(chunks, str(c) +'.txt', lines_between=4)
         # print(chunks)
-        c += 1
+        

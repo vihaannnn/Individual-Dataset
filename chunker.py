@@ -19,10 +19,11 @@ def write_chunks_to_file(chunks, output_file, separator="\n---\n"):
 import os
 
 directory = './output'
-c = 1
+c = ''
 for filename in os.listdir(directory):
     if os.path.isfile(os.path.join(directory, filename)):
         print(filename)
+        c = filename[6:-4]
     with open('./output/' + filename, 'r', encoding='utf-8') as file:
         # Read the entire contents of the file
         text = file.read()
@@ -66,5 +67,3 @@ for filename in os.listdir(directory):
 
     # semantic_splitter = SemanticChunker(chunk_size=1000, chunk_overlap=200)
     # chunks = semantic_splitter.split_text(text)
-
-    c += 1
