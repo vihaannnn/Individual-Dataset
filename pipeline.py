@@ -121,6 +121,7 @@ def create_chunks():
 
 def main():
     create_text()
+    create_chunks()
 
 if __name__ == "__main__":
     main()
