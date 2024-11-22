@@ -7,3 +7,6 @@ RawFiles/
 Recursive/
 Semantic/
 TokenWise/
+test-data/
+test-output/
+test-output_normal/
