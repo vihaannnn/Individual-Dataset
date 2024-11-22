@@ -77,18 +77,15 @@ def create_text():
 
             # Iterate through all pages
             
-
             text = ''
             pages = pdf.pages
             text_total = ''
             total_text_normal = ''
             for page in pages:
-                # print(type(pdf.pages))
                 # Extract text from the page
                 text = page.extract_text()
                 
                 text_normal = text
-                # print(text)
                 # Remove common hidden characters, but keep newlines
                 text = re.sub(r'[\x00-\x09\x0B-\x1F\x7F-\x9F]', '', text)
             
@@ -103,14 +100,14 @@ def create_text():
 
                 text = re.sub(r'\n', ' ', text)
             
-                # Normalize whitespace (optional)
-                # text = ' '.join(text.split())
                 text_total += text 
                 total_text_normal += text_normal
             
+            # write total text without any line seperation to the output directory - modified
             with open('./output/output' + str(c) + '.txt', 'w') as file:      
                 file.write(text_total)
             
+            # write total text - normal without modification to the output_normal directory
             with open('./output_normal/output_normal' + str(c) + '.txt', 'w') as file:      
                 file.write(total_text_normal)
 
@@ -149,9 +146,10 @@ def create_chunks():
 
     load_dotenv()  # This loads the variables from .env
     api_key = os.getenv("OPENAI_API_KEY")
-    openai.api_key = api_key
+    openai.api_key = api_key #initialise openAI api key
     directory = './output'
     c = ''
+    # Got through the output directory and perform chunking on each text file present
     for filename in os.listdir(directory):
         if os.path.isfile(os.path.join(directory, filename)):
             print(filename)
@@ -160,28 +158,24 @@ def create_chunks():
             # Read the entire contents of the file
             text = file.read()
 
-
+        #Start of Recursive Chunking Process
         text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000,
             chunk_overlap=200
         )
-
         chunks = text_splitter.split_text(text)
         write_chunks_to_file(chunks=chunks, output_file='./Recursive/Recusrive-Chunker-' + str(c) + '.txt')
 
         
-
+        #Start of Tokenwise Chunking Process
         text_splitter = TokenTextSplitter(chunk_size=100, chunk_overlap=20)
         chunks = text_splitter.split_text(text)
         write_chunks_to_file(chunks=chunks, output_file='./TokenWise/Token-Chunker-' + str(c) + '.txt')
         
-        
-        
+        #Start of Semantic Chunking Process
         text_splitter = SemanticChunker(OpenAIEmbeddings())
-
         # Split the text into chunks
         chunks = text_splitter.split_text(text)
-
         write_chunks_to_file(chunks=chunks, output_file='./Semantic/Semantic-Chunker-' + str(c) + '.txt')
 
 
