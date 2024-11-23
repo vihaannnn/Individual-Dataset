@@ -52,7 +52,7 @@ def remove_newlines(string_array):
     """
     return [s.strip() for s in string_array]
 
-def create_text():
+def create_text(directory, output_directory_name, output_normal_directory_name):
     """
     Processes PDF files from the './data' directory and extracts their text content.
     
@@ -66,14 +66,14 @@ def create_text():
     - './output/' for cleaned text
     - './output_normal/' for original text
     """
-    directory = './data'
+    # directory = './data'
     c = ''
     for filename in os.listdir(directory):
         if os.path.isfile(os.path.join(directory, filename)):
             print(filename)
             c = filename[:-4]
         # Open the PDF file
-        with pdfplumber.open("./data/" + filename) as pdf:
+        with pdfplumber.open(directory + "/" + filename) as pdf:
 
             # Iterate through all pages
             
@@ -104,11 +104,11 @@ def create_text():
                 total_text_normal += text_normal
             
             # write total text without any line seperation to the output directory - modified
-            with open('./output/output' + str(c) + '.txt', 'w') as file:      
+            with open(output_directory_name +'/output' + str(c) + '.txt', 'w') as file:      
                 file.write(text_total)
             
             # write total text - normal without modification to the output_normal directory
-            with open('./output_normal/output_normal' + str(c) + '.txt', 'w') as file:      
+            with open(output_normal_directory_name + '/output_normal' + str(c) + '.txt', 'w') as file:      
                 file.write(total_text_normal)
 
 def write_chunks_to_file(chunks, output_file, separator="\n---\n"):
@@ -126,7 +126,7 @@ def write_chunks_to_file(chunks, output_file, separator="\n---\n"):
             if i < len(chunks) - 1:
                 file.write(separator)
 
-def create_chunks():
+def create_chunks(output_directory_name, recursive_directory_name, semantic_directory_name, tokenwise_directory_name):
     """
     Creates different types of text chunks from processed PDF text files.
     
@@ -147,14 +147,14 @@ def create_chunks():
     load_dotenv()  # This loads the variables from .env
     api_key = os.getenv("OPENAI_API_KEY")
     openai.api_key = api_key #initialise openAI api key
-    directory = './output'
+    directory = output_directory_name
     c = ''
     # Got through the output directory and perform chunking on each text file present
     for filename in os.listdir(directory):
         if os.path.isfile(os.path.join(directory, filename)):
             print(filename)
             c = filename[6:-4]
-        with open('./output/' + filename, 'r', encoding='utf-8') as file:
+        with open(directory + '/' + filename, 'r', encoding='utf-8') as file:
             # Read the entire contents of the file
             text = file.read()
 
@@ -164,19 +164,19 @@ def create_chunks():
             chunk_overlap=200
         )
         chunks = text_splitter.split_text(text)
-        write_chunks_to_file(chunks=chunks, output_file='./Recursive/Recusrive-Chunker-' + str(c) + '.txt')
+        write_chunks_to_file(chunks=chunks, output_file=recursive_directory_name +'/Recursive-Chunker-' + str(c) + '.txt')
 
         
         #Start of Tokenwise Chunking Process
         text_splitter = TokenTextSplitter(chunk_size=100, chunk_overlap=20)
         chunks = text_splitter.split_text(text)
-        write_chunks_to_file(chunks=chunks, output_file='./TokenWise/Token-Chunker-' + str(c) + '.txt')
+        write_chunks_to_file(chunks=chunks, output_file=tokenwise_directory_name + '/Token-Chunker-' + str(c) + '.txt')
         
         #Start of Semantic Chunking Process
         text_splitter = SemanticChunker(OpenAIEmbeddings())
         # Split the text into chunks
         chunks = text_splitter.split_text(text)
-        write_chunks_to_file(chunks=chunks, output_file='./Semantic/Semantic-Chunker-' + str(c) + '.txt')
+        write_chunks_to_file(chunks=chunks, output_file=semantic_directory_name + '/Semantic-Chunker-' + str(c) + '.txt')
 
 
 def main():
@@ -187,8 +187,15 @@ def main():
     1. Calls create_text() to process PDFs and extract text
     2. Calls create_chunks() to generate different types of text chunks
     """
-    create_text()
-    create_chunks()
+    directory_name = '../data'
+    output_directory_name = '../output'
+    output_normal_directory_name = '../output_normal'
+    create_text(directory_name, output_directory_name, output_normal_directory_name)
+
+    recursive_directory_name = '../Recursive'
+    semantic_directory_name = '../Semantic'
+    tokenwise_directory_name = '../TokenWise'
+    create_chunks(output_directory_name, recursive_directory_name, semantic_directory_name, tokenwise_directory_name)
 
 if __name__ == "__main__":
     main()

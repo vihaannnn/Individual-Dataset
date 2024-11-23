@@ -7,6 +7,6 @@ RawFiles/
 Recursive/
 Semantic/
 TokenWise/
-test-data/
-test-output/
-test-output_normal/
+.pytest_cache/
+test/__pycache__/
+workingDir/__pycache__/
