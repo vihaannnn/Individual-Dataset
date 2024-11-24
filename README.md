@@ -9,7 +9,7 @@ Make sure you are on the 'master' branch of the project. Other branches are prov
 This project aims to create the Indian-Supreme-Court-Judgements-Chunked dataset via a pipeline and the chunked contents from the PDF files have been uploaded to HuggingFace.
 
 ## About the Dataset
-Dataset published on - https://huggingface.co/datasets/vihaannnn/Indian-Supreme-Court-Judgements-Chunked/blob/master/README.md
+Dataset published on - https://huggingface.co/datasets/vihaannnn/Indian-Supreme-Court-Judgements-Chunked
 
 
 ## Prerequisites
