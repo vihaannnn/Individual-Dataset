@@ -1,8 +1,8 @@
 # Individual Dataset
 This Repository is for the Individual Dataset for the AIPI course 510, created by Vihaan Swapneshkumar Nama.
-Make sure you are on the 'main' branch of the project. Other branches provided to see commits and history.
+Make sure you are on the 'main' branch of the project. Other branches are provided to see commits and history.
 
-```markdown
+
 # Indian-Supreme-Court-Judgements-Chunked
 
 ## Introduction
@@ -17,7 +17,7 @@ This project requires the use of a Python virtual environment to manage dependen
 - Python 3.x installed on your system.
 - Git installed on your machine
 - Basic knowledge of command-line operations.
-```
+
 ## Cloning the Project
 - Open the Command Shell or Terminal on your machine and execute the following command
    ```sh
@@ -33,7 +33,7 @@ This project requires the use of a Python virtual environment to manage dependen
    - Search for `cmd` or `PowerShell` in the start menu and open it.
 
 2. **Navigate to your project directory**:
-   cd (move) into your specific project path (where you have saved it on your computer), example - 
+   cd (move) into your specific project path (where you have saved it on your computer), for example - 
    ```sh
    cd /Individual-Dataset
    ```
@@ -56,7 +56,7 @@ This project requires the use of a Python virtual environment to manage dependen
    - You can find Terminal in your Applications > Utilities folder.
 
 2. **Navigate to your project directory**:
-   cd (move) into your specific project path (where you have saved it on your computer), example - 
+   cd (move) into your specific project path (where you have saved it on your computer), for example - 
    ```sh
    cd /Individual-Dataset
    ```
@@ -99,6 +99,10 @@ The code to do so is -
   cd Individual-Dataset/workingDir
   python script.py
 ```
+## Creating the Project Structure
+On your local, once the project is cloned and the virtual environment is created, create several folders in the root directory of the project titled 'Semantic', 'Recursive', 'TokenWise', 'output', 'metadata', and 'output_normal'
+
+These files are where your data will go once the pipeline has run.
 
 ## To run the test cases of the project
 Go into the main directory and run the testing commands.
@@ -111,4 +115,3 @@ If the tests all show up as green -> all tests are running fine
 
 ## Credits
 - Part of this README.md file was generated using the Artificial Intelligence agent - ChatGPT
-```
