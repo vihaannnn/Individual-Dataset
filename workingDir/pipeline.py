@@ -11,46 +11,7 @@ from langchain_openai.embeddings import OpenAIEmbeddings
 #By Vihaan Nama
 #Some parts of code and documentation generated using AI - Claude, Perplexity, ChatGPT
 
-def paragraph_chunking(text, paragraphs_per_chunk):
-    """
-    Splits text into chunks based on paragraphs.
-    
-    Args:
-        text (str): The input text to be chunked
-        paragraphs_per_chunk (int): Number of paragraphs to include in each chunk
-    
-    Returns:
-        list: A list of text chunks, where each chunk contains the specified number of paragraphs
-    """
-    paragraphs = text.split('\n\n')
-    return ['\n\n'.join(paragraphs[i:i+paragraphs_per_chunk]) for i in range(0, len(paragraphs), paragraphs_per_chunk)]
 
-def write_array_to_file(array, filename, lines_between):
-    """
-    Writes an array of strings to a file with specified number of empty lines between entries.
-    
-    Args:
-        array (list): List of strings to write to file
-        filename (str): Path to the output file
-        lines_between (int): Number of empty lines to insert between array items
-    """
-    with open(filename, 'w', newline='') as file:
-        for i, item in enumerate(array):
-            file.write(item + os.linesep)
-            if i < len(array) - 1:  # Don't add extra lines after the last item
-                file.write(os.linesep * lines_between)
-
-def remove_newlines(string_array):
-    """
-    Removes leading and trailing whitespace from each string in an array.
-    
-    Args:
-        string_array (list): List of strings to process
-    
-    Returns:
-        list: List of strings with whitespace removed
-    """
-    return [s.strip() for s in string_array]
 
 def create_text(directory, output_directory_name, output_normal_directory_name):
     """
@@ -61,12 +22,16 @@ def create_text(directory, output_directory_name, output_normal_directory_name):
     2. Extracts text from each page
     3. Cleans the extracted text by removing hidden characters
     4. Saves both cleaned and original versions to separate output directories
+
+    Args: 
+    directory - Directory where the original PDF files are present in.
+    output_directory_name - Directory where the processed output of the PDF documents should be sent.
+    output_normal_directory_name - Directory where the unprocessed output of the PDF documents should be written.
     
     Output files are saved in:
     - './output/' for cleaned text
     - './output_normal/' for original text
     """
-    # directory = './data'
     c = ''
     for filename in os.listdir(directory):
         if os.path.isfile(os.path.join(directory, filename)):
@@ -119,6 +84,9 @@ def write_chunks_to_file(chunks, output_file, separator="\n---\n"):
         chunks (list): List of text chunks to write
         output_file (str): Path to the output file
         separator (str, optional): String to use as separator between chunks. Defaults to "\n---\n"
+
+    Output:
+        
     """
     with open(output_file, 'w') as file:
         for i, chunk in enumerate(chunks):
@@ -134,14 +102,20 @@ def create_chunks(output_directory_name, recursive_directory_name, semantic_dire
     1. Loads OpenAI API key from environment variables
     2. Processes text files from the './output' directory
     3. Creates three different types of chunks using:
-       - RecursiveCharacterTextSplitter (1000 chars, 200 overlap)
+       - RecursiveCharacterTextSplitter (1000 chars, 200 overlaps)
        - TokenTextSplitter (100 tokens, 20 overlap)
        - SemanticChunker (using OpenAI embeddings)
+
+    Args:
+    output_directory_name - Directory where the processed output of the PDF documents should be sent.
+    recursive_directory_name - Directory where the Recursive text file outputs of the text files should be written.
+    semantic_directory_name - Directory where the Semantic text file outputs of the text files should be written.
+    tokenwise_directory_name - Directory where the TokenWise text file outputs of the text files should be written.
     
     Output files are saved in:
-    - './Recursive/' for recursive character splits
-    - './TokenWise/' for token-based splits
-    - './Semantic/' for semantic-based splits
+    - '../Recursive/' for recursive character splits
+    - '../TokenWise/' for token-based splits
+    - '../Semantic/' for semantic-based splits
     """
 
     load_dotenv()  # This loads the variables from .env
@@ -179,6 +153,20 @@ def create_chunks(output_directory_name, recursive_directory_name, semantic_dire
         write_chunks_to_file(chunks=chunks, output_file=semantic_directory_name + '/Semantic-Chunker-' + str(c) + '.txt')
 
 def extract_metadata(input_folder, output_folder):
+    """
+    Creates metadata text from processed PDF text files.
+    
+    This function:
+    1. Processes text files from the './output' directory
+    2. Creates metadata of each PDF file
+
+    Args:
+    input_folder - Directory where the processed output of the PDF documents should be sent.
+    output_folder - Directory where the metadata text file outputs of the text files should be written.
+   
+    Output files are saved in:
+    - '../metadata/' for recursive character splits
+    """
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
     c = ''
@@ -216,12 +204,12 @@ def main():
     directory_name = '../data'
     output_directory_name = '../output'
     output_normal_directory_name = '../output_normal'
-    # create_text(directory_name, output_directory_name, output_normal_directory_name)
+    create_text(directory_name, output_directory_name, output_normal_directory_name)
 
     recursive_directory_name = '../Recursive'
     semantic_directory_name = '../Semantic'
     tokenwise_directory_name = '../TokenWise'
-    # create_chunks(output_directory_name, recursive_directory_name, semantic_directory_name, tokenwise_directory_name)
+    create_chunks(output_directory_name, recursive_directory_name, semantic_directory_name, tokenwise_directory_name)
 
 if __name__ == "__main__":
     main()
