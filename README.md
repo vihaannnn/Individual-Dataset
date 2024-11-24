@@ -92,17 +92,25 @@ This project requires the use of a Python virtual environment to manage dependen
   ```
   After deactivation, the `(venv)` prefix will disappear from your terminal/command prompt.
 
+## Creating the Project Structure
+On your local, once the project is cloned and the virtual environment is created, create several folders in the root directory of the project titled 'Semantic', 'Recursive', 'TokenWise', 'output', 'metadata', and 'output_normal'
+
+These files are where your data will go once the pipeline has run.
+
+## Obtain Data
+ - Original PDF documents for this chunking can be obtained here - https://www.sci.gov.in/judgements-judgement-date/
+Fill out the form and specify the date ranges to obtain the data
+ - Once you obtain the PDF documents - label them with a number for example - '1.pdf' No number should repeat.
+ - Delete the already existing 2 documents in the 'data' folder
+ - Place your new documents in the folder
+
 ## To run the project
 Go into the workingDir directory and run the pipeline.py file.
 The code to do so is - 
 ```sh
   cd Individual-Dataset/workingDir
-  python script.py
+  python pipeline.py
 ```
-## Creating the Project Structure
-On your local, once the project is cloned and the virtual environment is created, create several folders in the root directory of the project titled 'Semantic', 'Recursive', 'TokenWise', 'output', 'metadata', and 'output_normal'
-
-These files are where your data will go once the pipeline has run.
 
 ## To run the test cases of the project
 Go into the main directory and run the testing commands.
