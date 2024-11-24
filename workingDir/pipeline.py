@@ -22,6 +22,11 @@ def create_text(directory, output_directory_name, output_normal_directory_name):
     2. Extracts text from each page
     3. Cleans the extracted text by removing hidden characters
     4. Saves both cleaned and original versions to separate output directories
+
+    Args: 
+    directory - Directory where the original PDF files are present in.
+    output_directory_name - Directory where the processed output of the PDF documents should be sent.
+    output_normal_directory_name - Directory where the unprocessed output of the PDF documents should be written.
     
     Output files are saved in:
     - './output/' for cleaned text
@@ -79,6 +84,9 @@ def write_chunks_to_file(chunks, output_file, separator="\n---\n"):
         chunks (list): List of text chunks to write
         output_file (str): Path to the output file
         separator (str, optional): String to use as separator between chunks. Defaults to "\n---\n"
+
+    Output:
+        
     """
     with open(output_file, 'w') as file:
         for i, chunk in enumerate(chunks):
@@ -94,9 +102,15 @@ def create_chunks(output_directory_name, recursive_directory_name, semantic_dire
     1. Loads OpenAI API key from environment variables
     2. Processes text files from the './output' directory
     3. Creates three different types of chunks using:
-       - RecursiveCharacterTextSplitter (1000 chars, 200 overlap)
+       - RecursiveCharacterTextSplitter (1000 chars, 200 overlaps)
        - TokenTextSplitter (100 tokens, 20 overlap)
        - SemanticChunker (using OpenAI embeddings)
+
+    Args:
+    output_directory_name - Directory where the processed output of the PDF documents should be sent.
+    recursive_directory_name - Directory where the Recursive text file outputs of the text files should be written.
+    semantic_directory_name - Directory where the Semantic text file outputs of the text files should be written.
+    tokenwise_directory_name - Directory where the TokenWise text file outputs of the text files should be written.
     
     Output files are saved in:
     - '../Recursive/' for recursive character splits
@@ -145,7 +159,11 @@ def extract_metadata(input_folder, output_folder):
     This function:
     1. Processes text files from the './output' directory
     2. Creates metadata of each PDF file
-    
+
+    Args:
+    input_folder - Directory where the processed output of the PDF documents should be sent.
+    output_folder - Directory where the metadata text file outputs of the text files should be written.
+   
     Output files are saved in:
     - '../metadata/' for recursive character splits
     """
