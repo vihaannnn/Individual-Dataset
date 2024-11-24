@@ -1,6 +1,6 @@
 # Individual Dataset
 This Repository is for the Individual Dataset for the AIPI course 510, created by Vihaan Swapneshkumar Nama.
-Make sure you are on the 'main' branch of the project. Other branches are provided to see commits and history.
+Make sure you are on the 'master' branch of the project. Other branches are provided to see commits and history.
 
 
 # Indian-Supreme-Court-Judgements-Chunked
@@ -9,7 +9,7 @@ Make sure you are on the 'main' branch of the project. Other branches are provid
 This project aims to create the Indian-Supreme-Court-Judgements-Chunked dataset via a pipeline and the chunked contents from the PDF files have been uploaded to HuggingFace.
 
 ## About the Dataset
-Dataset published on - https://huggingface.co/datasets/vihaannnn/Indian-Supreme-Court-Judgements-Chunked/blob/main/README.md
+Dataset published on - https://huggingface.co/datasets/vihaannnn/Indian-Supreme-Court-Judgements-Chunked/blob/master/README.md
 
 
 ## Prerequisites
@@ -104,6 +104,15 @@ Fill out the form and specify the date ranges to obtain the data
  - Delete the already existing 2 documents in the 'data' folder
  - Place your new documents in the folder
 
+## Creating the ENV file
+Go into the workingDir directory. Create a file name '.env'
+
+Go to openai platform - https://platform.openai.com/docs/overview and create an API Key
+
+Place the API key in your .env file - 
+```sh
+  OPENAI_API_KEY=<your-API-key>
+```
 ## To run the project
 Go into the workingDir directory and run the pipeline.py file.
 The code to do so is - 
