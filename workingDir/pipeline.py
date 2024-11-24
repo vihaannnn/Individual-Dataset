@@ -178,6 +178,27 @@ def create_chunks(output_directory_name, recursive_directory_name, semantic_dire
         chunks = text_splitter.split_text(text)
         write_chunks_to_file(chunks=chunks, output_file=semantic_directory_name + '/Semantic-Chunker-' + str(c) + '.txt')
 
+def extract_metadata(input_folder, output_folder):
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    c = ''
+    for filename in os.listdir(input_folder):
+        c = filename[6:-4]
+        if filename.endswith('.txt'):
+            input_path = os.path.join(input_folder, filename)
+            output_path = os.path.join(output_folder, f"metadata{c}.txt")
+
+            with open(input_path, 'r') as input_file:
+                content = input_file.read()
+
+            pattern = r'(.*?)(J U D G M E N T|JUDGMENT|O R D E R|ORDER)'
+            match = re.search(pattern, content, re.DOTALL)
+
+            if match:
+                metadata = match.group(1).strip()
+                with open(output_path, 'w') as output_file:
+                    output_file.write(metadata)
+
 
 def main():
     """
@@ -187,15 +208,20 @@ def main():
     1. Calls create_text() to process PDFs and extract text
     2. Calls create_chunks() to generate different types of text chunks
     """
+
+    input_folder = '../output'
+    output_folder = '../metadata'
+    extract_metadata(input_folder, output_folder)
+
     directory_name = '../data'
     output_directory_name = '../output'
     output_normal_directory_name = '../output_normal'
-    create_text(directory_name, output_directory_name, output_normal_directory_name)
+    # create_text(directory_name, output_directory_name, output_normal_directory_name)
 
     recursive_directory_name = '../Recursive'
     semantic_directory_name = '../Semantic'
     tokenwise_directory_name = '../TokenWise'
-    create_chunks(output_directory_name, recursive_directory_name, semantic_directory_name, tokenwise_directory_name)
+    # create_chunks(output_directory_name, recursive_directory_name, semantic_directory_name, tokenwise_directory_name)
 
 if __name__ == "__main__":
     main()

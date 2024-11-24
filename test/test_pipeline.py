@@ -1,4 +1,4 @@
-from workingDir.pipeline import create_text, create_chunks
+from workingDir.pipeline import create_text, create_chunks, extract_metadata
 import pytest
 import os
 
@@ -26,3 +26,11 @@ def test_create_chunks():
     assert os.path.exists('test/test-Recursive/Recursive-Chunker-1000.txt'), "Recursive Chunks not generated"
     assert os.path.exists('test/test-Semantic/Semantic-Chunker-1000.txt'), "Semantic Chunks not generated"
     assert os.path.exists('test/test-Tokenwise/Token-Chunker-1000.txt'), "TokenWise Chunks not generated"
+
+def test_extract_metadata():
+    input_directory = 'test/test-output'
+    output_directory = 'test/test-metadata'
+
+    extract_metadata(input_folder=input_directory, output_folder=output_directory)
+
+    assert os.path.exists('test/test-metadata/metadata1000.txt')
