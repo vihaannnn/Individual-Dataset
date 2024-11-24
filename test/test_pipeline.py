@@ -1,4 +1,4 @@
-from workingDir.pipeline import create_text, create_chunks, extract_metadata
+from workingDir.pipeline import create_text, create_chunks, extract_metadata, recursive_eda, semantic_eda, tokenwise_eda
 import pytest
 import os
 
@@ -33,4 +33,13 @@ def test_extract_metadata():
 
     extract_metadata(input_folder=input_directory, output_folder=output_directory)
 
-    assert os.path.exists('test/test-metadata/metadata1000.txt')
+    assert os.path.exists('test/test-metadata/metadata1000.txt'), "Metadata Not Extracted"
+
+def test_eda():
+    assert os.path.exists('test/test-output/output1000.txt'), "Output not present"
+    recursive_directory_name = 'test/test-Recursive'
+    semantic_directory_name = 'test/test-Semantic'
+    tokenwise_directory_name = 'test/test-TokenWise'
+    recursive_eda(recursive_directory_name)
+    semantic_eda(semantic_directory_name)
+    tokenwise_eda(tokenwise_directory_name)
