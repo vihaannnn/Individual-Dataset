@@ -104,6 +104,15 @@ Fill out the form and specify the date ranges to obtain the data
  - Delete the already existing 2 documents in the 'data' folder
  - Place your new documents in the folder
 
+## Creating the ENV file
+Go into the workingDir directory. Create a file name '.env'
+
+Go to openai platform - https://platform.openai.com/docs/overview and create an API Key
+
+Place the API key in your .env file - 
+```sh
+  OPENAI_API_KEY=<your-API-key>
+```
 ## To run the project
 Go into the workingDir directory and run the pipeline.py file.
 The code to do so is - 
