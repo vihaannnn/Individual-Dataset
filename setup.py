@@ -1,4 +1,6 @@
 from setuptools import setup, find_packages
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 # Function to parse the requirements.txt file
 def parse_requirements(filename):
