@@ -4,6 +4,8 @@ aiosignal==1.3.1
 annotated-types==0.7.0
 anyio==4.6.2.post1
 attrs==24.2.0
+autocommand==2.2.2
+backports.tarfile==1.2.0
 certifi==2024.8.30
 cffi==1.17.1
 charset-normalizer==3.3.2
@@ -20,7 +22,13 @@ httpx==0.27.2
 httpx-sse==0.4.0
 huggingface-hub==0.26.2
 idna==3.10
+importlib_metadata==8.0.0
+inflect==7.3.1
 iniconfig==2.0.0
+jaraco.collections==5.1.0
+jaraco.context==5.3.0
+jaraco.functools==4.0.1
+jaraco.text==3.12.1
 jiter==0.7.1
 joblib==1.4.2
 jsonpatch==1.33
@@ -33,6 +41,7 @@ langchain-openai==0.2.8
 langchain-text-splitters==0.3.2
 langsmith==0.1.143
 marshmallow==3.23.1
+more-itertools==10.3.0
 multidict==6.1.0
 mypy-extensions==1.0.0
 nltk==3.9.1
@@ -45,6 +54,7 @@ patsy==0.5.6
 pdfminer.six==20231228
 pdfplumber==0.11.4
 pillow==10.4.0
+platformdirs==4.2.2
 pluggy==1.5.0
 propcache==0.2.0
 pycparser==2.22
@@ -67,12 +77,18 @@ six==1.16.0
 sniffio==1.3.1
 SQLAlchemy==2.0.35
 statsmodels==0.14.4
+Supreme-Court-Judgment-Docs-Chunker==0.1
 tenacity==9.0.0
 threadpoolctl==3.5.0
 tiktoken==0.8.0
+tomli==2.0.1
 tqdm==4.67.0
+typeguard==4.3.0
 typing-inspect==0.9.0
 typing_extensions==4.12.2
 tzdata==2024.2
 urllib3==2.2.3
+wheel==0.43.0
 yarl==1.17.1
+your_package_name==0.1
+zipp==3.19.2
