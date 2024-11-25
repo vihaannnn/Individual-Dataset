@@ -84,9 +84,20 @@ This project requires the use of a Python virtual environment to manage dependen
    ```
    This command installs all the packages listed in the `requirements.txt` file into your virtual environment.
 
+   **Install the dependencies using setup.py**:
+   Make sure you have setuptools installed on your machine
+   ```sh
+   pip install setuptools
+   ```
+   Next just run - 
+   ```sh
+   python setup.py install
+   ```
+   Either of these methods should have all your dependencies downloaded
+
 ## Deactivating the Virtual Environment
 
-- Once you're done working, you can deactivate the virtual environment by running:
+Once you're done working, you can deactivate the virtual environment by running:
   ```sh
   deactivate
   ```
