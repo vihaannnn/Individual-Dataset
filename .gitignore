@@ -11,3 +11,6 @@ TokenWise/
 test/__pycache__/
 workingDir/__pycache__/
 metadata/
+build/
+dist/
+*.egg-info/

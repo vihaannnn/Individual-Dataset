@@ -2,6 +2,7 @@
 This Repository is for the Individual Dataset for the AIPI course 510, created by Vihaan Swapneshkumar Nama.
 Make sure you are on the 'master' branch of the project. Other branches are provided to see commits and history.
 
+NOTE  - EDA CODE INCLUDED WITH THE PIPELINE CODE IN THE pipeline.py FILE IN THE DIRECTORY - workingDir
 
 # Indian-Supreme-Court-Judgements-Chunked
 
@@ -84,9 +85,20 @@ This project requires the use of a Python virtual environment to manage dependen
    ```
    This command installs all the packages listed in the `requirements.txt` file into your virtual environment.
 
+   **Install the dependencies using setup.py**:
+   Make sure you have setuptools installed on your machine
+   ```sh
+   pip install setuptools
+   ```
+   Next just run - 
+   ```sh
+   python setup.py install
+   ```
+   Either of these methods should have all your dependencies downloaded
+
 ## Deactivating the Virtual Environment
 
-- Once you're done working, you can deactivate the virtual environment by running:
+Once you're done working, you can deactivate the virtual environment by running:
   ```sh
   deactivate
   ```
@@ -115,6 +127,9 @@ Place the API key in your .env file -
 ```
 ## To run the project
 Go into the workingDir directory and run the pipeline.py file.
+
+Please make sure the ENV file was created and in the working directory before running the pipeline
+
 The code to do so is - 
 ```sh
   cd Individual-Dataset/workingDir
@@ -123,8 +138,11 @@ The code to do so is -
 
 ## To run the test cases of the project
 Go into the main directory and run the testing commands.
+
 4 test cases should execute and pass.
 If the tests all show up as green -> all tests are running fine
+
+Please make sure the ENV file was created and in the working directory before running tests
 ```sh
   cd Individual-Dataset
   pytest -v
