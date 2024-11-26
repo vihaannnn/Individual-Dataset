@@ -2,6 +2,7 @@
 This Repository is for the Individual Dataset for the AIPI course 510, created by Vihaan Swapneshkumar Nama.
 Make sure you are on the 'master' branch of the project. Other branches are provided to see commits and history.
 
+NOTE  - EDA CODE INCLUDED WITH THE PIPELINE CODE IN THE pipeline.py FILE IN THE DIRECTORY - workingDir
 
 # Indian-Supreme-Court-Judgements-Chunked
 

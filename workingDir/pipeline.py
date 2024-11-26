@@ -202,12 +202,30 @@ def extract_metadata(input_folder, output_folder):
                     output_file.write(metadata)
 
 def read_chunks(file_path):
+    """
+    Reads text chunks from a file and splits them by a separator.
+    
+    Args:
+        file_path (str): Path to the input file containing chunks separated by "---".
+
+    Returns:
+        list: A list of individual text chunks, stripped of leading and trailing whitespace.
+    """
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
     chunks = re.split(r'---', content)
     return [chunk.strip() for chunk in chunks if chunk.strip()]
 
 def get_all_chunks(folder_path):
+    """
+    Reads all text chunks from files in a specified folder.
+
+    Args:
+        folder_path (str): Path to the folder containing text files with chunks.
+
+    Returns:
+        list: A combined list of text chunks from all files in the folder.
+    """
     all_chunks = []
     for filename in os.listdir(folder_path):
         if filename.endswith('.txt'):
@@ -216,12 +234,39 @@ def get_all_chunks(folder_path):
     return all_chunks
 
 def tokenize_and_clean(text):
+    """
+    Tokenizes and cleans a text string by converting to lowercase, removing stop words and punctuation.
+
+    Args:
+        text (str): The input text to be tokenized and cleaned.
+
+    Returns:
+        list: A list of cleaned tokens.
+    """
     tokens = word_tokenize(text.lower())
     stop_words = set(stopwords.words('english'))
     tokens = [token for token in tokens if token not in stop_words and token not in string.punctuation]
     return tokens
 
 def recursive_eda(directory):
+    """
+    Performs exploratory data analysis (EDA) on text chunks created using Recursive Character Text Splitter.
+
+    Args:
+        directory (str): Path to the directory containing recursive chunked text files.
+
+    Prints:
+        - Average chunk size (characters)
+        - Average words per chunk
+        - Top 10 most occurring words
+        - Total unique words
+        - Average word length
+        - Chunk length distribution
+        - Word count distribution
+        - Percentage of chunks containing numbers
+        - Average sentence count per chunk
+        - Token frequency distribution
+    """
     folder_path = directory
     all_chunks = get_all_chunks(folder_path)
     all_tokens = [tokenize_and_clean(chunk) for chunk in all_chunks]
@@ -286,6 +331,24 @@ def recursive_eda(directory):
     print(f"   Tokens appearing more than 10 times: {sum(1 for count in token_freq.values() if count > 10)}")
 
 def semantic_eda(directory):
+    """
+    Performs exploratory data analysis (EDA) on text chunks created using Semantic Chunker.
+
+    Args:
+        directory (str): Path to the directory containing semantic chunked text files.
+
+    Prints:
+        - Average chunk size (characters)
+        - Average words per chunk
+        - Top 10 most occurring words
+        - Total unique words
+        - Average word length
+        - Chunk length distribution
+        - Word count distribution
+        - Percentage of chunks containing numbers
+        - Average sentence count per chunk
+        - Token frequency distribution
+    """
     folder_path = directory
     all_chunks = get_all_chunks(folder_path)
     all_tokens = [tokenize_and_clean(chunk) for chunk in all_chunks]
@@ -350,6 +413,24 @@ def semantic_eda(directory):
     print(f"   Tokens appearing more than 10 times: {sum(1 for count in token_freq.values() if count > 10)}")
 
 def tokenwise_eda(directory):
+    """
+    Performs exploratory data analysis (EDA) on text chunks created using Token-based Text Splitter.
+
+    Args:
+        directory (str): Path to the directory containing token-wise chunked text files.
+
+    Prints:
+        - Average chunk size (characters)
+        - Average words per chunk
+        - Top 10 most occurring words
+        - Total unique words
+        - Average word length
+        - Chunk length distribution
+        - Word count distribution
+        - Percentage of chunks containing numbers
+        - Average sentence count per chunk
+        - Token frequency distribution
+    """
     folder_path = directory
     all_chunks = get_all_chunks(folder_path)
     all_tokens = [tokenize_and_clean(chunk) for chunk in all_chunks]
