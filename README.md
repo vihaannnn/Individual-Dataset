@@ -126,6 +126,9 @@ Place the API key in your .env file -
 ```
 ## To run the project
 Go into the workingDir directory and run the pipeline.py file.
+
+Please make sure the ENV file was created and in the working directory before running the pipeline
+
 The code to do so is - 
 ```sh
   cd Individual-Dataset/workingDir
@@ -134,8 +137,11 @@ The code to do so is -
 
 ## To run the test cases of the project
 Go into the main directory and run the testing commands.
+
 4 test cases should execute and pass.
 If the tests all show up as green -> all tests are running fine
+
+Please make sure the ENV file was created and in the working directory before running tests
 ```sh
   cd Individual-Dataset
   pytest -v
